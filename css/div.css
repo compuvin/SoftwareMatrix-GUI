@@ -1,0 +1,195 @@
+body
+{
+	font-family: Arial, Helvetica, sans-serif;
+	background: #1D1D1D;
+	}
+
+.a1, .a2, .a3, .a4
+{
+	margin: 0px;
+	border: 0px solid;
+	}
+
+.VerticalSpace, .HorizontalSpace
+{
+	border: 0px;
+	float: left;
+	}
+
+.a1
+{
+	float: left;
+	background-color: #009999;
+	padding-top: 10px;
+	padding-left: 15px;
+	padding-right: 15px;
+	padding-bottom: 10px;
+	top: 8px;
+	position: absolute;
+	height: 95%;
+	width: 15%;
+	color: #000000;
+	}
+
+.a2
+{
+	padding-top: 10px;
+	padding-left: 15px;
+	padding-right: 15px;
+	padding-bottom: 10px;
+	position: relative;
+	left: 17.5%;
+	width: 63%;
+	color: #000000;
+	}
+
+.a3
+{
+	padding-top: 10px;
+	padding-left: 15px;
+	padding-right: 15px;
+	padding-bottom: 10px;
+	position: relative;
+	left: 17.5%;
+	width: 63%;
+	color: #000000;
+	}
+
+.a4
+{
+	background-color: #123123;
+	padding-top: 10px;
+	padding-left: 15px;
+	padding-right: 16px;
+	padding-bottom: 10px;
+	position: absolute;
+	right: 20px; 
+	height: 95%;
+	width: 15%;
+	color: #FFFFFF;
+	}
+
+.VerticalSpace
+{
+	float: left;
+	height: 15px;
+	width: 81%;
+	}
+
+.HorizontalSpace
+{
+	position: relative;
+	left: 17.5%;
+	height: 900px;
+	width: 15px;
+	}
+
+ul.bullet
+{
+	font-weight: bold;
+	line-height: 2;
+	list-style-type: circle;
+	color: #FFFFFF;
+	}
+
+a:link
+{
+	color: #000000;
+	text-decoration: none;
+	}
+
+a:visited
+{
+	color: #000000;
+	text-decoration: none;
+	}
+
+a:hover
+{
+	color: yellow;
+	text-decoration: underline;
+	}
+
+a:active
+{
+	color: #000000;
+	text-decoration: none;
+	}
+
+h1
+{
+	text-align: left;
+	text-transform: uppercase;
+	color: #FFFFFF;
+	text-decoration: underline;
+	}
+
+#table1
+{
+	width: 100%;
+	border: 1px solid #DDDDDD;
+	border-collapse: collapse;
+	background-color: #FFFFFF;
+	}
+
+#table1 th, #table1 td
+{
+	padding: 10px;
+	text-align: left;
+	}
+
+#table1 th
+{
+	background-color: #FFB5B5;
+	color: #000000;
+	}
+
+#table1 td
+{
+	font-family: "Times New Roman", Times, serif;
+	}
+
+#table1 tr:nth-child(even)
+{
+	background-color: #F2F2F2;
+	}
+
+#table1 tr:hover
+{
+	background-color: #DDDDDD;
+	}
+
+#table2
+{
+	width: 100%;
+	border: 1px solid #DDDDDD;
+	border-collapse: collapse;
+	background-color: #FFFFFF;
+	}
+
+#table2 th, #table2 td
+{
+	padding: 10px;
+	text-align: left;
+	}
+
+#table2 th
+{
+	background-color: #FFFFE0;
+	color: #000000;
+	}
+
+#table2 td
+{
+	font-family: "Times New Roman", Times, serif;
+	}
+
+#table2 tr:nth-child(even)
+{
+	background-color: #F2F2F2;
+	}
+
+#table2 tr:hover
+{
+	background-color: #DDDDDD;
+	}
