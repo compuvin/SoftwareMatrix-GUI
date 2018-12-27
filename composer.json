@@ -1,0 +1,6 @@
+{
+"require": {
+        "mysql/mysql-server": "8.0.*",
+        "compuvin/Software-Matrix": "@dev",
+    },
+}
