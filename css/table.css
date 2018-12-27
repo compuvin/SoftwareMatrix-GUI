@@ -1,0 +1,104 @@
+#table1 /* software needing review table */
+{
+	width: 100%;
+	border: 1px solid #DDDDDD;
+	border-collapse: collapse;
+	background-color: #FFFFFF;
+	}
+
+#table1 th, #table1 td
+{
+	padding: 10px;
+	text-align: left;
+	}
+
+#table1 th
+{
+	background-color: #FFB5B5;
+	color: #000000;
+	}
+
+#table1 td
+{
+	font-family: "Times New Roman", Times, serif;
+	}
+
+#table1 tr:nth-child(even)
+{
+	background-color: #F2F2F2;
+	}
+
+#table1 tr:hover
+{
+	background-color: #DDDDDD;
+	}
+
+#table2 /* newly discovered software table */
+{
+	width: 100%;
+	border: 1px solid #DDDDDD;
+	border-collapse: collapse;
+	background-color: #FFFFFF;
+	}
+
+#table2 th, #table2 td
+{
+	padding: 10px;
+	text-align: left;
+	}
+
+#table2 th
+{
+	background-color: #FFFFE0;
+	color: #000000;
+	}
+
+#table2 td
+{
+	font-family: "Times New Roman", Times, serif;
+	}
+
+#table2 tr:nth-child(even)
+{
+	background-color: #F2F2F2;
+	}
+
+#table2 tr:hover
+{
+	background-color: #DDDDDD;
+	}
+
+#table3 /* interior tables */
+{
+	width: 100%;
+	border: 1px solid #DDDDDD;
+	border-collapse: collapse;
+	background-color: #FFFFFF;
+	}
+
+#table3 th, #table3 td
+{
+	padding: 10px;
+	text-align: left;
+	}
+
+#table3 th
+{
+	background-color: #000000;
+	color: #FFFFFF;
+	}
+
+#table3 td
+{
+	font-family: "Times New Roman", Times, serif;
+	}
+
+#table3 tr:nth-child(even)
+{
+	background-color: #F2F2F2;
+	}
+
+#table3 tr:hover
+{
+	background-color: #DDDDDD;
+	}
