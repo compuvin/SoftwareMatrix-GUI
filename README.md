@@ -6,3 +6,5 @@ Work in progress... Check out the progress here: https://github.com/compuvin/Sof
 <img src="http://whatthefoss.com/wp-content/uploads/2018/12/Screenshot-index-1024x518.jpg">
 
 Requires the SoftwareMatrix scripts found at https://github.com/compuvin/SoftwareMatrix
+
+<a href="https://www.codefactor.io/repository/github/compuvin/softwarematrix-gui"><img src="https://www.codefactor.io/repository/github/compuvin/softwarematrix-gui/badge" alt="CodeFactor" /></a>
