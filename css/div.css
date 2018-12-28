@@ -2,65 +2,44 @@
 {
 	margin: 0;
 	border: 0 solid;
+	border-radius: 10px;
+	padding-top: 10px;
+	padding-left: 15px;
+	padding-right: 15px;
+	padding-bottom: 10px;
+	color: #000000;
+	}
+
+.a1, .a4
+{
+	background-color: #009999;
+	position: absolute;
+	height: 95%;
+	width: 15%;
+	}
+
+.a2, .a3
+{
+	position: relative;
+	left: 17.5%;
+	width: 63%;
+	}
+
+.a1
+{
+	float: left;
+	top: 8px;
+	}
+
+.a4
+{
+	right: 20px; 
 	}
 
 .VerticalSpace, .HorizontalSpace
 {
 	border: 0;
 	float: left;
-	}
-
-.a1
-{
-	float: left;
-	background-color: #009999;
-	padding-top: 10px;
-	padding-left: 15px;
-	padding-right: 15px;
-	padding-bottom: 10px;
-	top: 8px;
-	position: absolute;
-	height: 95%;
-	width: 15%;
-	color: #000000;
-	}
-
-.a2
-{
-	padding-top: 10px;
-	padding-left: 15px;
-	padding-right: 15px;
-	padding-bottom: 10px;
-	position: relative;
-	left: 17.5%;
-	width: 63%;
-	color: #000000;
-	}
-
-.a3
-{
-	padding-top: 10px;
-	padding-left: 15px;
-	padding-right: 15px;
-	padding-bottom: 10px;
-	position: relative;
-	left: 17.5%;
-	width: 63%;
-	color: #000000;
-	}
-
-.a4
-{
-	background-color: #123123;
-	padding-top: 10px;
-	padding-left: 15px;
-	padding-right: 16px;
-	padding-bottom: 10px;
-	position: absolute;
-	right: 20px; 
-	height: 95%;
-	width: 15%;
-	color: #FFFFFF;
 	}
 
 .VerticalSpace
