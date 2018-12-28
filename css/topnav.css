@@ -1,0 +1,16 @@
+.topnav
+{
+	position:relative;
+	width: 100%;
+	height: 43px;
+	background-color: #009999;
+	}
+
+img
+{
+	float: right;
+	margin-top: 5px;
+	margin-left: 5px;
+	margin-right: 10px;
+	margin-bottom: 5px;
+	}
