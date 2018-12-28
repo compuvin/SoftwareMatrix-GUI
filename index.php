@@ -42,7 +42,7 @@ echo '<div class="HorizontalSpace"></div>';
 echo "\r\n\r\n"; //Line breaks for cleaner code
 
 //Future use
-echo '<div class="a4">Future Use</div>';
+echo '<div class="a4"></div>';
 echo "\r\n\r\n"; //Line breaks for cleaner code
 	
 //Software Needing Review';
