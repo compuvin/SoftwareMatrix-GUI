@@ -1,3 +1,23 @@
+<html>
+<head>
+	<title>Software Asset Management - Edit App Info</title>
+	<meta charset="UTF-8">
+	
+	<!--Favicons-->
+	<link rel="icon" type="image/ico" href="WhattheFOSS.ico"></link> 
+	<link rel="shortcut icon" href="WhattheFOSS.ico"></link>
+	
+	<!--Link Stylesheets-->
+	<link rel=stylesheet href="css/topnav.css" type="text/css"> <!--Top Navigation-->
+	<link rel=stylesheet href="css/ipage.css" type="text/css"> <!--Interior Pages-->
+	<link rel=stylesheet href="css/form.css" type="text/css"> <!--Forms-->
+</head>
+<body>
+
+<div class="topnav">
+	<a href="../"><img src="images\house.png" alt="home" width="32" height="32"></a>
+</div>
+
 <?php
 //Edit software information
 
@@ -77,6 +97,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 	if ($result == 1)
 	{
 		echo $Name . " was updated successfully. Here's were we'll want to go back to the previous page.";
+		echo '<script type="text/javascript">window.location = "' . $_POST["WebAddr"] .'"</script>';
 	} else {
 		echo "An error has occurred. Please review your submission.";
 	};
@@ -88,28 +109,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 	
 	//get results from database
 	$result = mysqli_query($connection,"SELECT * FROM discoveredapplications where ID = $appid");
-	//$all_property = array();  //declare an array for saving property
-
-	//showing property
-	//echo '<table id="table2">
-	//		<tr>';  //initialize table tag
-	//while ($property = mysqli_fetch_field($result)) {
-	//	echo '<th>' . $property->name . '</th>';  //get field name for header
-	//	array_push($all_property, $property->name);  //save those to array
-	//}
-	//echo '</tr>
-	//	'; //end tr tag
 
 	//showing all data
 	while ($row = mysqli_fetch_array($result)) {
-		//echo "<tr>";
-		//foreach ($all_property as $item) {
-		//	echo '
-		//<td>' . $row[$item] . '</td>'; //get items using property value
-		//}
-		//echo '
-		//</tr>
-		//';
 		$Name = $row["Name"];
 		$Free = $row["Free"];
 		$OpenSource = $row["OpenSource"];
@@ -131,39 +133,85 @@ function test_input($data) {
 }
 ?>
 
-<h2>Editing: <?php echo $Name;?></h2>
-<p><span class="error">* required field</span></p>
 <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"])?>"> 
-  ID: <b><?php echo $appid;?></b>
-  <input type="hidden" name="appid" value="<?php echo $appid;?>">
-  <br>
-  Name: <b><?php echo $Name;?></b>
-  <input type="hidden" name="Name" value="<?php echo $Name;?>">
-  <br>
-  Free:
-  <input type="radio" name="Free" <?php if (isset($Free) && $Free=="Y") echo "checked";?> value="Y">Yes
-  <input type="radio" name="Free" <?php if (isset($Free) && $Free=="N") echo "checked";?> value="N">No
-  <br>
-  Open Source:
-  <input type="radio" name="OpenSource" <?php if (isset($OpenSource) && $OpenSource=="Y") echo "checked";?> value="Y">Yes
-  <input type="radio" name="OpenSource" <?php if (isset($OpenSource) && $OpenSource=="N") echo "checked";?> value="N">No
-  <br><br>
-  Description of Software use:<br>
-  <textarea name="ReasonForSoftware" rows="5" cols="40"><?php echo $ReasonForSoftware;?></textarea>
-  <br><br>
-  Who Needs the Software (list devices or departments):<br>
-  <textarea name="NeededOnMachines" rows="5" cols="40"><?php echo $NeededOnMachines;?></textarea>
-  <br><br>
-  Plans for Removal: <input type="text" name="PlansForRemoval" value="<?php echo $PlansForRemoval;?>">
-  <br><br>
-  Update Method:
-  <input type="radio" name="UpdateMethod" <?php if (isset($UpdateMethod) && $UpdateMethod=="Automatic") echo "checked";?> value="Automatic">Automatic
-  <input type="radio" name="UpdateMethod" <?php if (isset($UpdateMethod) && $UpdateMethod=="Manual") echo "checked";?> value="Manual">Manual
-  <input type="radio" name="UpdateMethod" <?php if (isset($UpdateMethod) && $UpdateMethod=="None") echo "checked";?> value="None">None  
-  <span class="error">* <?php echo $genderErr;?></span>
-  <br><br>
-  Update URL: <input type="text" name="UpdateURL" value="<?php echo $UpdateURL;?>">
-  <span class="error"><?php echo $websiteErr;?></span>
-  <br><br>
-  <input type="submit" name="submit" value="Submit">  
+	<div class="container1">
+		<h2>Editing: <?php echo $Name;?></h2>
+		ID: <b><?php echo $appid;?></b>
+		<input type="hidden" name="appid" value="<?php echo $appid;?>">
+		<input type="hidden" name="Name" value="<?php echo $Name;?>">
+		<input type="hidden" name="WebAddr" value="<?php echo htmlspecialchars($_SERVER["HTTP_REFERER"]);?>">
+	</div>
+	<br>
+	<div class="container2">
+		Free:
+		<input type="radio" name="Free" <?php if (isset($Free) && $Free=="Y") echo "checked";?> value="Y">Yes
+		<input type="radio" name="Free" <?php if (isset($Free) && $Free=="N") echo "checked";?> value="N">No
+		<br>
+		Open Source:
+		<input type="radio" name="OpenSource" <?php if (isset($OpenSource) && $OpenSource=="Y") echo "checked";?> value="Y">Yes
+		<input type="radio" name="OpenSource" <?php if (isset($OpenSource) && $OpenSource=="N") echo "checked";?> value="N">No
+	</div>
+	<br>
+	<div class="container3">
+		<div class="row">
+			<div class="col-25">
+				<label>Description of Software Use</label>
+			</div>
+			<div class="col-75">
+				<textarea name="ReasonForSoftware" rows="5" cols="40" placeholder="Write something..."><?php echo $ReasonForSoftware;?></textarea>
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="col-25">
+				<label>Who Needs the Software (list devices or departments)</label>
+			</div>
+			<div class="col-75">
+				<textarea name="NeededOnMachines" rows="5" cols="40" placeholder="Write something..."><?php echo $NeededOnMachines;?></textarea>
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="col-25">
+				<label>Plans for Removal</label>
+			</div>
+			<div class="col-75">
+				<input type="text" name="PlansForRemoval" placeholder="Write something..." value="<?php echo $PlansForRemoval;?>">
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="col-25">
+				<label>Update Method *</label>
+			</div>
+			<div class="col-75">
+				<input type="radio" name="UpdateMethod" <?php if (isset($UpdateMethod) && $UpdateMethod=="Automatic") echo "checked";?> value="Automatic">Automatic
+				<input type="radio" name="UpdateMethod" <?php if (isset($UpdateMethod) && $UpdateMethod=="Manual") echo "checked";?> value="Manual">Manual
+				<input type="radio" name="UpdateMethod" <?php if (isset($UpdateMethod) && $UpdateMethod=="None") echo "checked";?> value="None">None  
+				<span class="error"><?php echo $genderErr;?></span>
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="col-25">
+				<label>Update URL:</label>
+			</div>
+			<div class="col-75">
+				<input type="text" name="UpdateURL" placeholder="Write something..." value="<?php echo $UpdateURL;?>">
+				<span class="error"><?php echo $websiteErr;?></span>
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="col-25">
+				<label><span class="error">* Required Field</span></label>
+			</div>
+			<div class="col-75">
+				<input type="submit" name="submit" value="Submit">
+			</div>
+		</div>
+	</div>
 </form>
+
+</body>
+</html>
