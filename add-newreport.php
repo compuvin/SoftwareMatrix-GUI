@@ -63,9 +63,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 		echo "An error has occurred. Please review your submission.";
 	};
   
-} else {
-	
-}  
+} 
 
 
 function test_input($data) {
