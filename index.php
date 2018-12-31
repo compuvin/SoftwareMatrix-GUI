@@ -2,6 +2,12 @@
 <head>
 	<title>Software Asset Management</title>
 	<meta charset="UTF-8">
+	
+	<!--Favicons-->
+	<link rel="icon" type="image/ico" href="WhattheFOSS.ico"></link> 
+	<link rel="shortcut icon" href="WhattheFOSS.ico"></link>
+	
+	<!--Link Stylesheets-->
 	<link rel=stylesheet href="css/div.css" type="text/css"> <!--Home Page Divs-->
 	<link rel=stylesheet href="css/hpage.css" type="text/css"> <!--Home Page-->
 	<link rel=stylesheet href="css/ipage.css" type="text/css"> <!--Interior Pages-->
@@ -36,7 +42,7 @@ echo '<div class="HorizontalSpace"></div>';
 echo "\r\n\r\n"; //Line breaks for cleaner code
 
 //Future use
-echo '<div class="a4">Future Use</div>';
+echo '<div class="a4"></div>';
 echo "\r\n\r\n"; //Line breaks for cleaner code
 	
 //Software Needing Review';
