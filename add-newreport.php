@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <html>
 <head>
 	<title>Software Asset Management - Edit App Info</title>
@@ -114,6 +115,7 @@ function test_input($data) {
 				<label><span class="error">* Required Field</span></label>
 			</div>
 			<div class="col-75">
+				<input type="button" value="Cancel" onclick="history.back()">
 				<input type="submit" name="submit" value="Submit">
 			</div>
 		</div>
