@@ -101,7 +101,7 @@ function test_input($data) {
 				<label>Name</label>
 			</div>
 			<div class="col-75">
-				<input type="text" name="ReportName" placeholder="Write something..." value="<?php echo $ReportName;?>">
+				<input type="text" name="ReportName" placeholder="Write something..." value="<?php echo $ReportName;?>" required>
 			</div>
 		</div>
 		<div class="row">
@@ -109,7 +109,7 @@ function test_input($data) {
 				<label>SQL Expression</label>
 			</div>
 			<div class="col-75">
-				<textarea name="ReportSQL" rows="5" cols="40" placeholder="Write something..."><?php echo $ReportSQL;?></textarea>
+				<textarea name="ReportSQL" rows="5" cols="40" placeholder="Write something..." required><?php echo $ReportSQL;?></textarea>
 			</div>
 		</div>
 
@@ -118,7 +118,7 @@ function test_input($data) {
 				<label>Sort Order</label>
 			</div>
 			<div class="col-75">
-				<input type="text" name="SortOrder" placeholder="Numerical values only!" value="<?php echo $SortOrder;?>">
+				<input type="text" name="SortOrder" placeholder="Numerical values only!" value="<?php echo $SortOrder;?>" required>
 				<span class="error"><?php echo $websiteErr;?></span>
 			</div>
 		</div>

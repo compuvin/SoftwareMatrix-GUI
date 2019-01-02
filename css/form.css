@@ -101,10 +101,6 @@ h2
 	margin-left:12em;
 	}
 	
-:required
-{
-	background-color: pink;
-	}
 
 /* Clear floats after the columns */
 .row:after
@@ -117,9 +113,24 @@ h2
 /* Responsive layout - when the screen is less than 600px wide, make the two columns stack on top of each other instead of next to each other */
 @media screen and (max-width: 600px)
 {
-	.col-25, .col-75, input[type=submit]
+	input[type=submit], input[type=button]
+	{
+		width: 50%;
+		margin-top: 0;
+		}
+		
+	.container1, .container2, .container3, .col-25, .col-75
 	{
 		width: 100%;
+		margin-top: 0;
+		}
+	}
+	
+@media screen and (min-width: 1366px)
+{	
+	.container1, .container2, .container3
+	{
+		width: 40%;
 		margin-top: 0;
 		}
 	}

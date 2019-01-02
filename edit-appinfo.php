@@ -12,6 +12,7 @@
 	<link rel=stylesheet href="css/topnav.css" type="text/css"> <!--Top Navigation-->
 	<link rel=stylesheet href="css/ipage.css" type="text/css"> <!--Interior Pages-->
 	<link rel=stylesheet href="css/form.css" type="text/css"> <!--Forms-->
+	
 </head>
 <body>
 
@@ -41,8 +42,9 @@ if(mysqli_connect_errno()){
 
 <?php
 // define variables and set to empty values
-$nameErr = $emailErr = $genderErr = $websiteErr = "";
+$websiteErr = "";
 $Name = $email = $gender = $comment = $website = "";
+$VersionStr = "";
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
   $Name = $_POST["Name"];
@@ -72,18 +74,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
   }
 
-  if (empty($_POST["ReasonForSoftware"])) {
-    $ReasonForSoftware = "";
-  } else {
-    $ReasonForSoftware = test_input($_POST["ReasonForSoftware"]);
-  }
-
-  if (empty($_POST["gender"])) {
-    $genderErr = "Gender is required";
-  } else {
-    $gender = test_input($_POST["gender"]);
-  }
-  
   //write changes to database
   $result = mysqli_query($connection,"UPDATE discoveredapplications
 	SET Free = '$Free',
@@ -114,6 +104,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 	//showing all data
 	while ($row = mysqli_fetch_array($result)) {
 		$Name = $row["Name"];
+		$Version_Oldest = $row["Version_Oldest"];
+		$Version_Newest = $row["Version_Newest"];
 		$Free = $row["Free"];
 		$OpenSource = $row["OpenSource"];
 		$ReasonForSoftware = $row["ReasonForSoftware"];
@@ -122,7 +114,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 		$UpdateMethod = $row["Update Method"];
 		$UpdateURL = $row["UpdateURL"];
 	}
-	echo "</table>";
+	if ($Version_Oldest == $Version_Newest) {
+		$VersionStr = $Version_Newest;
+	} else {
+		$VersionStr = $Version_Newest . ' (oldest: ' . $Version_Oldest . ')';
+	}
 }  
 
 
@@ -138,28 +134,42 @@ function test_input($data) {
 	<div class="container1">
 		<h2>Editing: <?php echo $Name;?></h2>
 		ID: <b><?php echo $appid;?></b>
+		<br>
+		Version: <b><?php echo $VersionStr;?></b>
 		<input type="hidden" name="appid" value="<?php echo $appid;?>">
 		<input type="hidden" name="Name" value="<?php echo $Name;?>">
-		<input type="hidden" name="WebAddr" value="<?php echo htmlspecialchars($_SERVER["HTTP_REFERER"]);?>">
+		<input type="hidden" name="WebAddr" value="<?php if (!empty($_SERVER["HTTP_REFERER"])) {echo htmlspecialchars($_SERVER["HTTP_REFERER"]);}?>">
 	</div>
 	<br>
 	<div class="container2">
-		Free:
-		<input type="radio" name="Free" <?php if (isset($Free) && $Free=="Y") echo "checked";?> value="Y">Yes
-		<input type="radio" name="Free" <?php if (isset($Free) && $Free=="N") echo "checked";?> value="N">No
-		<br>
-		Open Source:
-		<input type="radio" name="OpenSource" <?php if (isset($OpenSource) && $OpenSource=="Y") echo "checked";?> value="Y">Yes
-		<input type="radio" name="OpenSource" <?php if (isset($OpenSource) && $OpenSource=="N") echo "checked";?> value="N">No
+		<div class="row">
+			<div class="col-25">
+				Free *
+			</div>
+			<div class="col-75">
+				<input type="radio" name="Free" <?php if (isset($Free) && $Free=="Y") echo "checked";?> required value="Y">Yes
+				<input type="radio" name="Free" <?php if (isset($Free) && $Free=="N") echo "checked";?> required value="N">No
+			</div>
+		</div>
+		
+		<div class="row">
+			<div class="col-25">
+				Open Source *
+			</div>
+			<div class="col-75">
+				<input type="radio" name="OpenSource" <?php if (isset($OpenSource) && $OpenSource=="Y") echo "checked";?> required value="Y">Yes
+				<input type="radio" name="OpenSource" <?php if (isset($OpenSource) && $OpenSource=="N") echo "checked";?> required value="N">No
+			</div>
+		</div>
 	</div>
 	<br>
 	<div class="container3">
 		<div class="row">
 			<div class="col-25">
-				<label>Description of Software Use</label>
+				<label>Description of Software Use *</label>
 			</div>
 			<div class="col-75">
-				<textarea name="ReasonForSoftware" rows="5" cols="40" placeholder="Write something..."><?php echo $ReasonForSoftware;?></textarea>
+				<textarea name="ReasonForSoftware" id= "ReasonForSoftware" rows="5" cols="40" placeholder="Write something..." required><?php echo $ReasonForSoftware;?></textarea>
 			</div>
 		</div>
 
@@ -186,10 +196,12 @@ function test_input($data) {
 				<label>Update Method *</label>
 			</div>
 			<div class="col-75">
-				<input type="radio" name="UpdateMethod" <?php if (isset($UpdateMethod) && $UpdateMethod=="Automatic") echo "checked";?> value="Automatic">Automatic
-				<input type="radio" name="UpdateMethod" <?php if (isset($UpdateMethod) && $UpdateMethod=="Manual") echo "checked";?> value="Manual">Manual
-				<input type="radio" name="UpdateMethod" <?php if (isset($UpdateMethod) && $UpdateMethod=="None") echo "checked";?> value="None">None  
-				<span class="error"><?php echo $genderErr;?></span>
+				<select id="update" name="UpdateMethod" required>
+					<option></option>
+					<option <?php if (isset($UpdateMethod) && $UpdateMethod=="Automatic") echo "selected";?> value="Automatic">Automatic</option>
+					<option <?php if (isset($UpdateMethod) && $UpdateMethod=="Manual") echo "selected";?> value="Manual">Manual</option>
+					<option <?php if (isset($UpdateMethod) && $UpdateMethod=="None") echo "selected";?> value="None">None</option>
+				</select>
 			</div>
 		</div>
 
@@ -198,7 +210,7 @@ function test_input($data) {
 				<label>Update URL:</label>
 			</div>
 			<div class="col-75">
-				<input type="text" name="UpdateURL" placeholder="Write something..." value="<?php echo $UpdateURL;?>">
+				<input type="text" name="UpdateURL" id="UpdateURL" placeholder="Write something..." value="<?php echo $UpdateURL;?>">
 				<span class="error"><?php echo $websiteErr;?></span>
 			</div>
 		</div>

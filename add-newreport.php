@@ -86,7 +86,7 @@ function test_input($data) {
 				<label>Name</label>
 			</div>
 			<div class="col-75">
-				<input type="text" name="ReportName" placeholder="Write something..." value="">
+				<input type="text" name="ReportName" placeholder="Write something..." value="" required>
 			</div>
 		</div>
 		<div class="row">
@@ -94,7 +94,7 @@ function test_input($data) {
 				<label>SQL Expression</label>
 			</div>
 			<div class="col-75">
-				<textarea name="ReportSQL" rows="5" cols="40" placeholder="Write something..."></textarea>
+				<textarea name="ReportSQL" rows="5" cols="40" placeholder="Write something..." required></textarea>
 			</div>
 		</div>
 
@@ -103,7 +103,7 @@ function test_input($data) {
 				<label>Sort Order</label>
 			</div>
 			<div class="col-75">
-				<input type="text" name="SortOrder" placeholder="Numerical values only!" value="">
+				<input type="text" name="SortOrder" placeholder="Numerical values only!" value="" required>
 				<span class="error"><?php echo $websiteErr;?></span>
 			</div>
 		</div>

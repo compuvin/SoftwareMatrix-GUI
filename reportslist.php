@@ -30,16 +30,21 @@ if(mysqli_connect_errno()){
 }
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-	//Create Table
-	$result = mysqli_query($connection,"CREATE TABLE customreports (ID INT PRIMARY KEY AUTO_INCREMENT, ReportName TEXT, ReportSQL TEXT, SortOrder INT)");
-	
-	//Create some starter reports
-	$result = mysqli_query($connection,"INSERT INTO customreports SET ReportName = 'All Unique', ReportSQL = 'SELECT Name, FOSS, `Update Method` FROM discoveredapplications order by Name', SortOrder = '1'"); //All Unique
-	$result = mysqli_query($connection,"INSERT INTO customreports SET ReportName = 'Continue Updating', ReportSQL = 'SELECT ID, Name, Version_Oldest, Version_Newest,(select count(*) from software_matrix.applicationsdump where applicationsdump.Name = discoveredapplications.Name and applicationsdump.Version = discoveredapplications.Version_Oldest) Oldest, (select count(*) from software_matrix.applicationsdump where applicationsdump.Name = discoveredapplications.Name and applicationsdump.Version = discoveredapplications.Version_Newest) Newest FROM software_matrix.discoveredapplications where Version_Oldest <> Version_Newest order by Name', SortOrder = '2'"); //Continue Updating
-	$result = mysqli_query($connection,"INSERT INTO customreports SET ReportName = 'High Risk Apps', ReportSQL = 'SELECT Name, COUNT(Name), MAX(DateAdded), (select Computers from software_matrix.discoveredapplications where discoveredapplications.Name = highriskapps.Name) Computers FROM software_matrix.highriskapps GROUP BY Name ORDER BY count(Name) DESC, max(DateAdded) DESC, Computers DESC', SortOrder = '3'"); //High Risk Apps
-	$result = mysqli_query($connection,"INSERT INTO customreports SET ReportName = 'Licensed Apps', ReportSQL = 'SELECT L.Name, L.Publisher, L.Amount, D.Computers FROM software_matrix.licensedapps as L inner join software_matrix.discoveredapplications as D on L.Name = D.Name order by L.Name', SortOrder = '4'"); //Licensed Apps
-	$result = mysqli_query($connection,"INSERT INTO customreports SET ReportName = 'New Vulnerabilities', ReportSQL = 'SELECT * FROM software_matrix.highriskapps ORDER by DateAdded DESC LIMIT 10', SortOrder = '5'"); //New Vulnerabilities
-	$result = mysqli_query($connection,"INSERT INTO customreports SET ReportName = 'Software with count &lt 5', ReportSQL = 'SELECT Name, Publisher, Version, FirstDiscovered, LastDiscovered, count(Name) Count FROM software_matrix.applicationsdump group by Name having count < 5 order by count, Name', SortOrder = '6'"); //Software with count > 5
+	//Double check that the table doesn't exist
+	$result = mysqli_query($connection,"SELECT SortOrder, ReportName, ID FROM customreports order by SortOrder");
+
+	if ($result == FALSE) {
+		//Create Table
+		$result = mysqli_query($connection,"CREATE TABLE customreports (ID INT PRIMARY KEY AUTO_INCREMENT, ReportName TEXT, ReportSQL TEXT, SortOrder INT)");
+		
+		//Create some starter reports
+		$result = mysqli_query($connection,"INSERT INTO customreports SET ReportName = 'All Unique', ReportSQL = 'SELECT Name, FOSS, `Update Method` FROM discoveredapplications order by Name', SortOrder = '1'"); //All Unique
+		$result = mysqli_query($connection,"INSERT INTO customreports SET ReportName = 'Continue Updating', ReportSQL = 'SELECT ID, Name, Version_Oldest, Version_Newest,(select count(*) from software_matrix.applicationsdump where applicationsdump.Name = discoveredapplications.Name and applicationsdump.Version = discoveredapplications.Version_Oldest) Oldest, (select count(*) from software_matrix.applicationsdump where applicationsdump.Name = discoveredapplications.Name and applicationsdump.Version = discoveredapplications.Version_Newest) Newest FROM software_matrix.discoveredapplications where Version_Oldest <> Version_Newest order by Name', SortOrder = '2'"); //Continue Updating
+		$result = mysqli_query($connection,"INSERT INTO customreports SET ReportName = 'High Risk Apps', ReportSQL = 'SELECT Name, COUNT(Name), MAX(DateAdded), (select Computers from software_matrix.discoveredapplications where discoveredapplications.Name = highriskapps.Name) Computers FROM software_matrix.highriskapps GROUP BY Name ORDER BY count(Name) DESC, max(DateAdded) DESC, Computers DESC', SortOrder = '3'"); //High Risk Apps
+		$result = mysqli_query($connection,"INSERT INTO customreports SET ReportName = 'Licensed Apps', ReportSQL = 'SELECT L.Name, L.Publisher, L.Amount, D.Computers FROM software_matrix.licensedapps as L inner join software_matrix.discoveredapplications as D on L.Name = D.Name order by L.Name', SortOrder = '4'"); //Licensed Apps
+		$result = mysqli_query($connection,"INSERT INTO customreports SET ReportName = 'New Vulnerabilities', ReportSQL = 'SELECT * FROM software_matrix.highriskapps ORDER by DateAdded DESC LIMIT 10', SortOrder = '5'"); //New Vulnerabilities
+		$result = mysqli_query($connection,"INSERT INTO customreports SET ReportName = 'Software with count &lt 5', ReportSQL = 'SELECT Name, Publisher, Version, FirstDiscovered, LastDiscovered, count(Name) Count FROM software_matrix.applicationsdump group by Name having count < 5 order by count, Name', SortOrder = '6'"); //Software with count > 5
+	}
 }
 
 //get results from database
