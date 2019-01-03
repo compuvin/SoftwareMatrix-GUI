@@ -7,7 +7,6 @@ $i = 0; //counter
 
 //get results from database
 $result = mysqli_query($connection,"SELECT ID, ReportName FROM customreports order by SortOrder limit $LimitR");
-$all_property = array();  //declare an array for saving property
 
 if ($result !== FALSE) {
 	echo "<ul class=\"bullet\">\r\n\t";

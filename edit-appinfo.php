@@ -13,6 +13,21 @@
 	<link rel=stylesheet href="css/ipage.css" type="text/css"> <!--Interior Pages-->
 	<link rel=stylesheet href="css/form.css" type="text/css"> <!--Forms-->
 	
+	<script>
+		function showlicensedapps(freeyn)
+		{
+			if (freeyn == "N")
+			{
+				document.getElementById("LicensedApp").style.display = "block";
+			}
+			else
+			{
+				document.getElementById("LicensedApp").style.display = "none";
+				document.getElementById("LicenseAmt").value = "";
+				document.getElementById("LicenseComments").value = "";
+			}
+		}
+	</script>
 </head>
 <body>
 
@@ -45,6 +60,7 @@ if(mysqli_connect_errno()){
 $websiteErr = "";
 $Name = $email = $gender = $comment = $website = "";
 $VersionStr = "";
+$LicenseAmt = $LicenseComments = ""; //Initialize license variables
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
   $Name = $_POST["Name"];
@@ -87,6 +103,17 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 	
 	if ($result == 1)
 	{
+		if (!empty($_POST["LicenseAmt"])) {
+			$LicenseAmt = $_POST["LicenseAmt"];
+			$LicenseComments = $_POST["LicenseComments"];
+			//$result = mysqli_query($connection,"select Publisher from software_matrix.applicationsdump where applicationsdump.Name = '$Name' LIMIT 1");
+			$Publisher = mysqli_fetch_assoc(mysqli_query($connection,"select Publisher from applicationsdump where Name = '$Name' LIMIT 1"))['Publisher'];
+			if (mysqli_query($connection,"SELECT ID, Name FROM licensedapps where Name = '$Name' limit 1") !== FALSE) { //Check to see if the license information already exists
+				$result = mysqli_query($connection,"UPDATE licensedapps SET Name = '$Name', Publisher = '$Publisher', Amount = '$LicenseAmt', Comments = '$LicenseComments' where Name = '$Name'"); //New entry
+			} else {
+				$result = mysqli_query($connection,"INSERT INTO licensedapps SET Name = '$Name', Publisher = '$Publisher', Amount = '$LicenseAmt', Comments = '$LicenseComments'"); //New entry
+			}
+		}
 		echo $Name . " was updated successfully. Here's were we'll want to go back to the previous page.";
 		echo '<script type="text/javascript">window.location = "' . $_POST["WebAddr"] .'"</script>';
 	} else {
@@ -119,6 +146,15 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 	} else {
 		$VersionStr = $Version_Newest . ' (oldest: ' . $Version_Oldest . ')';
 	}
+	
+	//Check to see if there is license information entered
+	$result = mysqli_query($connection,"SELECT * FROM licensedapps where Name = '$Name' limit 1");
+
+	//showing all data
+	while ($row = mysqli_fetch_array($result)) {
+		$LicenseAmt = $row["Amount"];
+		$LicenseComments = $row["Comments"];
+	}
 }  
 
 
@@ -140,15 +176,15 @@ function test_input($data) {
 		<input type="hidden" name="Name" value="<?php echo $Name;?>">
 		<input type="hidden" name="WebAddr" value="<?php if (!empty($_SERVER["HTTP_REFERER"])) {echo htmlspecialchars($_SERVER["HTTP_REFERER"]);}?>">
 	</div>
-	<br>
+	
 	<div class="container2">
 		<div class="row">
 			<div class="col-25">
 				Free *
 			</div>
 			<div class="col-75">
-				<input type="radio" name="Free" <?php if (isset($Free) && $Free=="Y") echo "checked";?> required value="Y">Yes
-				<input type="radio" name="Free" <?php if (isset($Free) && $Free=="N") echo "checked";?> required value="N">No
+				<input type="radio" name="Free" <?php if (isset($Free) && $Free=="Y") echo "checked";?> required value="Y" onclick="showlicensedapps('Y')">Yes
+				<input type="radio" name="Free" <?php if (isset($Free) && $Free=="N") echo "checked";?> required value="N" onclick="showlicensedapps('N')">No
 			</div>
 		</div>
 		
@@ -162,7 +198,27 @@ function test_input($data) {
 			</div>
 		</div>
 	</div>
-	<br>
+	
+	<div id="LicensedApp" class="container2" <?php if (isset($Free) && $Free=="Y") echo "style=\"display:none\"";?>>
+		<div class="row">
+			<div class="col-25">
+				<label>Number of licenses</label>
+			</div>
+			<div class="col-75">
+				<input type="text" name="LicenseAmt" id="LicenseAmt" placeholder="Numerical values only!" value="<?php echo $LicenseAmt;?>">
+			</div>
+		</div>
+		
+		<div class="row">
+			<div class="col-25">
+				<label>Purchased from/comments</label>
+			</div>
+			<div class="col-75">
+				<input type="text" name="LicenseComments" id="LicenseComments" placeholder="(Optional)" value="<?php echo $LicenseComments;?>">
+			</div>
+		</div>
+	</div>
+
 	<div class="container3">
 		<div class="row">
 			<div class="col-25">
@@ -207,7 +263,7 @@ function test_input($data) {
 
 		<div class="row">
 			<div class="col-25">
-				<label>Update URL:</label>
+				<label>Update URL</label>
 			</div>
 			<div class="col-75">
 				<input type="text" name="UpdateURL" id="UpdateURL" placeholder="Write something..." value="<?php echo $UpdateURL;?>">

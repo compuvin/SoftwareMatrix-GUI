@@ -76,10 +76,10 @@ function test_input($data) {
 
 <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"])?>"> 
 	<div class="container1">
-		<h2>Create new report</h2>
+		<h2>Create a new report</h2>
 		<input type="hidden" name="WebAddr" value="<?php echo htmlspecialchars($_SERVER["HTTP_REFERER"]);?>">
 	</div>
-	<br>
+
 	<div class="container3">
 		<div class="row">
 			<div class="col-25">
