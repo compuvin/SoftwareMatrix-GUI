@@ -94,7 +94,6 @@ function test_input($data) {
 		<input type="hidden" name="reportid" value="<?php echo $reportid;?>">
 		<input type="hidden" name="WebAddr" value="<?php echo htmlspecialchars($_SERVER["HTTP_REFERER"]);?>">
 	</div>
-	<br>
 	<div class="container3">
 		<div class="row">
 			<div class="col-25">
