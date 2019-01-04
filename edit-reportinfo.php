@@ -12,6 +12,17 @@
 	<link rel=stylesheet href="css/topnav.css" type="text/css"> <!--Top Navigation-->
 	<link rel=stylesheet href="css/ipage.css" type="text/css"> <!--Interior Pages-->
 	<link rel=stylesheet href="css/form.css" type="text/css"> <!--Forms-->
+	
+	<script>
+		function deletereport()
+		{
+			var r=confirm("Are you sure you want to delete this report?");
+			if (r==true) {
+				document.getElementById("deleteyn").value = "Y";
+				document.editreportinfo.submit();
+			}
+		}
+	</script>
 </head>
 <body>
 
@@ -49,20 +60,34 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
   $ReportName = $_POST["ReportName"];
   $ReportSQL = $_POST["ReportSQL"];
   $SortOrder = $_POST["SortOrder"];
+
   
-  //Add report to database
-  $result = mysqli_query($connection,"UPDATE customreports
-	SET ReportName = '$ReportName',
-	ReportSQL = '$ReportSQL',
-	SortOrder = '$SortOrder' where ID = $reportid");
-	
-	if ($result == 1)
-	{
-		echo $ReportName . " was added successfully. Here's were we'll want to go back to the previous page.";
-		echo '<script type="text/javascript">window.location = "' . $_POST["WebAddr"] .'"</script>';
+	if ($_POST["deleteyn"] == "N") {
+	  //Add report to database
+	  $result = mysqli_query($connection,"UPDATE customreports
+		SET ReportName = '$ReportName',
+		ReportSQL = '$ReportSQL',
+		SortOrder = '$SortOrder' where ID = $reportid");
+		
+		if ($result == 1)
+		{
+			echo $ReportName . " was added successfully. Here's were we'll want to go back to the previous page.";
+			echo '<script type="text/javascript">window.location = "' . $_POST["WebAddr"] .'"</script>';
+		} else {
+			echo "An error has occurred. Please review your submission.";
+		};
 	} else {
-		echo "An error has occurred. Please review your submission.";
-	};
+		//Delete the report from database
+		$result = mysqli_query($connection,"DELETE from customreports where ID = $reportid");
+		
+		if ($result == 1)
+		{
+			echo $ReportName . " was deleted successfully. Here's were we'll want to go back to the previous page.";
+			echo '<script type="text/javascript">window.location = "' . $_POST["WebAddr"] .'"</script>';
+		} else {
+			echo "An error has occurred. Please review your submission.";
+		};
+	}
   
 } else {
 	//Software ID from database
@@ -88,11 +113,12 @@ function test_input($data) {
 }
 ?>
 
-<form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"])?>"> 
+<form name="editreportinfo" method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"])?>"> 
 	<div class="container1">
 		<h2>Editing report: <?php echo $ReportName;?></h2>
 		<input type="hidden" name="reportid" value="<?php echo $reportid;?>">
 		<input type="hidden" name="WebAddr" value="<?php echo htmlspecialchars($_SERVER["HTTP_REFERER"]);?>">
+		<input type="hidden" name="deleteyn" id="deleteyn" value="N">
 	</div>
 	<div class="container3">
 		<div class="row">
@@ -128,8 +154,8 @@ function test_input($data) {
 			</div>
 			<div class="col-75">
 				<input type="button" value="Back" onclick="history.back()">
-				<input type="button" value="Delete" id="delete" onclick="alert('Delete hasn\'t been coded yet')">
-				<input type="submit" name="submit" value="Submit">
+				<input type="button" value="Delete" id="delete" onclick="deletereport()">
+				<input type="submit" name="submitform" value="Submit">
 			</div>
 		</div>
 	</div>	
