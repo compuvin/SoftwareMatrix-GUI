@@ -8,6 +8,7 @@
 	<link rel="shortcut icon" href="WhattheFOSS.ico"></link>
 	
 	<!--Link Stylesheets-->
+	<link rel=stylesheet href="css/topnav.css" type="text/css"> <!--Top Navigation-->
 	<link rel=stylesheet href="css/ipage.css" type="text/css"> <!--Interior Pages-->
 	<link rel=stylesheet href="css/table.css" type="text/css"> <!--Tables-->
 </head>
@@ -35,6 +36,12 @@ $result = mysqli_query($connection,"SELECT ReportName, ReportSQL FROM customrepo
 $getID = mysqli_fetch_assoc($result);
 $ReportName = $getID["ReportName"];
 $ReportSQL = $getID["ReportSQL"];
+
+//Put the name in the Top Navigation
+echo "<div class=\"topnav\">\r\n\t";
+	echo "<span id=\"title\">" . $ReportName . "</span>\r\n\t";
+	echo "<a href=\"../\"><img id=\"home\" src=\"images\house.png\" alt=\"home\"></a>\r\n";
+echo "</div>";
 
 //get results from database
 $result = mysqli_query($connection,$ReportSQL);
