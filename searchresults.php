@@ -1,9 +1,9 @@
 <?php
 $WebAddr = $_POST["WebAddr"] . "?";
 
-if (!empty ($_POST["AppName"])) {$WebAddr = $WebAddr . "name=" . $_POST["AppName"];}
-if (!empty ($_POST["Computer"])) {$WebAddr = $WebAddr . "computer=" . $_POST["Computer"];}
-if (!empty ($_POST["Publisher"])) {$WebAddr = $WebAddr . "publisher=" . $_POST["Publisher"];}
+if (!empty ($_POST["AppName"])) {if (strpos($WebAddr,"=",0) !== FALSE) {$WebAddr = $WebAddr . "&";}; $WebAddr = $WebAddr . "name=" . $_POST["AppName"];}
+if (!empty ($_POST["Computer"])) {if (strpos($WebAddr,"=",0) !== FALSE) {$WebAddr = $WebAddr . "&";}; $WebAddr = $WebAddr . "computer=" . $_POST["Computer"];}
+if (!empty ($_POST["Publisher"])) {if (strpos($WebAddr,"=",0) !== FALSE) {$WebAddr = $WebAddr . "&";}; $WebAddr = $WebAddr . "publisher=" . $_POST["Publisher"];}
 
 //clean up if nothing was searched for
 if (substr($WebAddr,-1,1) == "?") {

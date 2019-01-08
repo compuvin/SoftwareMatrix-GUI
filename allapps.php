@@ -12,7 +12,7 @@
 	<link rel=stylesheet href="css/topnav.css" type="text/css"> <!--Top Navigation-->
 	<link rel=stylesheet href="css/ipage.css" type="text/css"> <!--Interior Pages-->
 	<link rel=stylesheet href="css/table.css" type="text/css"> <!--Tables-->
-	<link rel=stylesheet href="css/form.css" type="text/css"> <!--Forms-->
+	<link rel=stylesheet href="css/search.css" type="text/css"> <!--Search Inputs-->
 </head>
 <body>
 
@@ -51,11 +51,12 @@ echo "<div class=\"searchoptions\">\r\n\t";
 echo "<form method=\"post\" action=\"searchresults.php\">\r\n\t";
 echo "<input type=\"hidden\" name=\"WebAddr\" value='" . htmlspecialchars($_SERVER["PHP_SELF"]) . "'>\r\n\t"; //Post page is the same for multiple searches to this tell us how to get back
 echo "<label>Application</label>\r\n\t";
-echo "<input type=\"text\" class=\"searchinput\" name=\"AppName\" placeholder=\"Application Name\" value=\"$AppName\">\r\n\t";
-echo "<div class=\"row\">\r\n\t\t";
-echo "<div class=\"col-25\"></div>\r\n\t\t";
-echo "<div class=\"col-75\"><input type=\"submit\" name=\"submit\" value=\"Search\"></div>\r\n\t";
-echo "</div>\r\n\t";
+echo "<input type=\"text\" name=\"AppName\" placeholder=\"Application Name\" value=\"$AppName\">\r\n\t";
+echo "<label>Publisher</label>\r\n\t";
+echo "<input type=\"text\" name=\"Publisher\" placeholder=\"Publisher\" value=\"$Publisher\">\r\n\t";
+echo "<label>Computer</label>\r\n\t";
+echo "<input type=\"text\" name=\"Computer\" placeholder=\"Computer Name\" value=\"$Computer\">\r\n\t";
+echo "<input type=\"submit\" name=\"submit\" value=\"Search\">\r\n\t";
 echo "</form>\r\n";
 echo "</div>";
 
