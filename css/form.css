@@ -83,6 +83,21 @@ h2
 	margin-top: 7px;
 	padding: 20px;
 	}
+	
+.searchoptions
+{
+	width: 98%;
+	border-radius: 10px;
+	background-color: green;
+	margin-top: 7px;
+	margin-bottom: 7px;
+	padding: 1%;
+	}
+	
+.searchinput
+{
+	width: auto;
+	}
 
 .col-25
 {

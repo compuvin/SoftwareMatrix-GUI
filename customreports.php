@@ -60,7 +60,15 @@ echo "\r\n</tr>\r\n"; //end tr tag
 while ($row = mysqli_fetch_array($result)) {
     echo "\r\n<tr>";
     foreach ($all_property as $item) {
-        echo "\r\n\t<td>" . $row[$item] . "</td>"; //get items using property value
+        if ($item == "ID" and strpos($ReportSQL,"discoveredapplications",0) !== FALSE) {
+			echo "\r\n\t<td><a href=\"edit-appinfo.php?id=" . $row[$item] . "\">" . $row[$item] . "</a></td>"; //Make the ID clickable
+		} elseif ($item == "Name") {
+			echo "\r\n\t<td><a href=\"allapps.php?name=" . $row[$item] . "\">" . $row[$item] . "</a></td>"; //Make the name clickable
+		} elseif ($item == "Publisher") {
+			echo "\r\n\t<td><a href=\"allapps.php?publisher=" . $row[$item] . "\">" . $row[$item] . "</a></td>"; //Make the name clickable
+		} else {
+			echo "\r\n\t<td>" . $row[$item] . "</td>"; //get items using property value
+		}
     }
     echo "\r\n</tr>\r\n"; //end tr tag
 }
