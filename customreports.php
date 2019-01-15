@@ -66,6 +66,8 @@ while ($row = mysqli_fetch_array($result)) {
 			echo "\r\n\t<td><a href=\"allapps.php?name=" . $row[$item] . "\">" . $row[$item] . "</a></td>"; //Make the name clickable
 		} elseif ($item == "Publisher") {
 			echo "\r\n\t<td><a href=\"allapps.php?publisher=" . $row[$item] . "\">" . $row[$item] . "</a></td>"; //Make the name clickable
+		} elseif ($item == "Computer") {
+				echo "\r\n\t<td><a href=\"allapps.php?computer=" . $row[$item] . "\">" . $row[$item] . "</a></td>"; //Make the computer name clickable	
 		} else {
 			echo "\r\n\t<td>" . $row[$item] . "</td>"; //get items using property value
 		}
