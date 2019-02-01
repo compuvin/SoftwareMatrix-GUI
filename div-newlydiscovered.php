@@ -2,7 +2,7 @@
 //Newly Discovered Software - Referred by index.php
 
 //get results from database
-$result = mysqli_query($connection,"SELECT ID, Name, FOSS, ReasonForSoftware \"Usage\", FirstDiscovered \"First Discovered\" FROM discoveredapplications where FirstDiscovered > current_date()-7 order by FirstDiscovered DESC");
+$result = mysqli_query($connection,"SELECT ID, Name, FOSS, ReasonForSoftware \"Usage\", FirstDiscovered \"First Discovered\" FROM discoveredapplications where FirstDiscovered > (current_date() - INTERVAL 7 DAY) order by FirstDiscovered DESC");
 $all_property = array();  //declare an array for saving property
 
 //showing property
