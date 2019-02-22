@@ -26,7 +26,7 @@
 $AppName = $something = "";
 
 //Basic SQL query
-$SQLstr ="SELECT Name, FOSS, `Update Method`, ID FROM discoveredapplications";
+$SQLstr ="SELECT Name, Computers \"Count (not realtime)\", FOSS, `Update Method`, ID FROM discoveredapplications";
 
 //Get search variables
 if (!empty ($_GET["name"])) {$AppName = $_GET["name"];}
