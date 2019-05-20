@@ -81,7 +81,7 @@ if ($Publisher !== "") {
 if (substr($SQLstr,-5,5) == " and ") {
 	$SQLstr = substr($SQLstr,0,-5);
 }
-$SQLstr = $SQLstr . " order by Name";
+$SQLstr = $SQLstr . " order by Name, Computer";
 
 if (strpos($SQLstr,"where",0) == FALSE) {
 	echo '<script>alert("This report cannot be run without search criteria as it will return too many results");</script>'; //initialize table tag
