@@ -84,7 +84,7 @@ if (substr($SQLstr,-5,5) == " and ") {
 $SQLstr = $SQLstr . " order by Name, Computer";
 
 if (strpos($SQLstr,"where",0) == FALSE) {
-	echo '<script>alert("This report cannot be run without search criteria as it will return too many results");</script>'; //initialize table tag
+	//echo '<script>alert("This report cannot be run without search criteria as it will return too many results");</script>';
 } else {
 	//get results from database
 	$result = mysqli_query($connection, $SQLstr);
