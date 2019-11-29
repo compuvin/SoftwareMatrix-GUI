@@ -26,7 +26,7 @@
 $AppName = $something = "";
 
 //Basic SQL query
-$SQLstr ="SELECT Name, Computers \"Count (not realtime)\", FOSS, `Update Method`, ID FROM discoveredapplications";
+$SQLstr ="SELECT Name, Computers \"Count (not real-time)\", FOSS, `Update Method`, ID FROM discoveredapplications";
 
 //Get search variables
 if (!empty ($_GET["name"])) {$AppName = $_GET["name"];}
@@ -92,7 +92,7 @@ while ($row = mysqli_fetch_array($result)) {
 		if ($item == "ID") {
 			echo "\r\n\t<td><a href=\"edit-appinfo.php?id=" . $row[$item] . "\">Edit</a></td>"; //Make the ID clickable
 		} elseif ($item == "Name") {
-			echo "\r\n\t<td><a href=\"allapps.php?name=" . $row[$item] . "\">" . $row[$item] . "</a></td>"; //Make the report name clickable	
+			echo "\r\n\t<td><a href=\"allapps.php?name=" . str_replace("+","%2B",$row[$item]) . "\">" . $row[$item] . "</a></td>"; //Make the report name clickable	
 		} else {
 			echo "\r\n\t<td>" . $row[$item] . "</td>"; //get items using property value
 		}
