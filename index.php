@@ -12,6 +12,33 @@
 	<link rel=stylesheet href="css/hpage.css" type="text/css"> <!--Home Page-->
 	<link rel=stylesheet href="css/ipage.css" type="text/css"> <!--Interior Pages-->
 	<link rel=stylesheet href="css/table.css" type="text/css"> <!--Tables-->
+	
+	<style>
+		input[type=text], select, textarea
+		{
+			border: 1px solid #CCCCCC;
+			box-sizing: border-box;
+			border-radius: 4px;
+			resize: vertical;
+			color: #000000;
+			}
+
+		input[type=submit]:hover, input[type=button]:hover
+		{
+			background-color: #333333;
+			color: #FFFFFF;
+			}
+			
+		input[type=submit]
+		{
+			background-color: #1D1D1D;
+			#padding: 12px 20px;
+			border: none;
+			border-radius: 4px;
+			cursor: pointer;
+			color: #FFFFFF;
+			}
+	</style>
 </head>
 <body>
 
@@ -42,7 +69,16 @@ echo '<div class="HorizontalSpace"></div>';
 echo "\r\n\r\n"; //Line breaks for cleaner code
 
 //Future use
-echo '<div class="a4"></div>';
+echo "<div class=\"a4\">\r\n";
+echo "<center>\r\n";
+//echo "Search test - <a href=\"discoveredapps.php\">Unique</a> or <a href=\"allapps.php\">All</a>";
+echo "<form method=\"post\" action=\"searchresults.php\">\r\n\t";
+echo "<input type=\"hidden\" name=\"WebAddr\" value='" . htmlspecialchars($_SERVER["PHP_SELF"]) . "'>\r\n\t"; //Post page is the same for multiple searches to this tell us how to get back
+echo "<input type=\"text\" name=\"OmniBox\" placeholder=\"Search\" value=\"\">\r\n\t";
+echo "<input type=\"submit\" name=\"submit\" value=\"Go\">\r\n\t";
+echo "</form>\r\n";
+echo "</center>\r\n";
+echo "</div>";
 echo "\r\n\r\n"; //Line breaks for cleaner code
 	
 //Software Needing Review';
