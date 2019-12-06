@@ -21,6 +21,7 @@
 			border-radius: 4px;
 			resize: vertical;
 			color: #000000;
+			width: 70%;
 			}
 
 		input[type=submit]:hover, input[type=button]:hover
