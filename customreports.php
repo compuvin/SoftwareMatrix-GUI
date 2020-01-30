@@ -16,6 +16,7 @@
 
 <?php
 require_once('login.php');
+$i = 0;
 
 //create connection
 $connection = mysqli_connect($host, $user, $pass, $db_name);
@@ -73,7 +74,9 @@ while ($row = mysqli_fetch_array($result)) {
 		}
     }
     echo "\r\n</tr>\r\n"; //end tr tag
+	$i = $i + 1; //Count items
 }
+echo "<tr><td colspan=" . count($all_property) . ">" . $i . " items</td></tr>";
 echo "</table>";
 ?>
 
