@@ -38,6 +38,14 @@ $getID = mysqli_fetch_assoc($result);
 $ReportName = $getID["ReportName"];
 $ReportSQL = $getID["ReportSQL"];
 
+//Split the SQL string and the Order by
+$SQLParts = explode("order by", $ReportSQL);
+$OrderBy = $_GET["orderby"];
+if ($OrderBy != "") {
+	$ReportSQL = $SQLParts[0] . " order by " . $OrderBy;
+}
+//echo $ReportSQL;
+
 //Put the name in the Top Navigation
 echo "<div class=\"topnav\">\r\n\t";
 	echo "<span id=\"title\">" . $ReportName . "</span>\r\n\t";
@@ -52,7 +60,7 @@ $all_property = array();  //declare an array for saving property
 echo '<table id="table3">'; //initialize table tag
 echo "\r\n<tr>";
 while ($property = mysqli_fetch_field($result)) {
-    echo "\r\n\t<th>" . $property->name . "</th>";  //get field name for header
+    echo "\r\n\t<th><a class=\"HeaderLinks\" href=" . htmlspecialchars($_SERVER["PHP_SELF"]) . "?id=" . $reportid . "&orderby=" . $property->name . ">" . $property->name . "</a></th>";  //get field name for header
     array_push($all_property, $property->name);  //save those to array
 }
 echo "\r\n</tr>\r\n"; //end tr tag
