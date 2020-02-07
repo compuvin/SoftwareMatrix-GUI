@@ -72,7 +72,6 @@ echo "\r\n\r\n"; //Line breaks for cleaner code
 //Future use
 echo "<div class=\"a4\">\r\n";
 echo "<center>\r\n";
-//echo "Search test - <a href=\"discoveredapps.php\">Unique</a> or <a href=\"allapps.php\">All</a>";
 echo "<form method=\"post\" action=\"searchresults.php\">\r\n\t";
 echo "<input type=\"hidden\" name=\"WebAddr\" value='" . htmlspecialchars($_SERVER["PHP_SELF"]) . "'>\r\n\t"; //Post page is the same for multiple searches to this tell us how to get back
 echo "<input type=\"text\" name=\"OmniBox\" placeholder=\"Search\" value=\"\">\r\n\t";
