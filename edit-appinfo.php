@@ -108,11 +108,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 			$LicenseComments = $_POST["LicenseComments"];
 			//$result = mysqli_query($connection,"select Publisher from software_matrix.applicationsdump where applicationsdump.Name = '$Name' LIMIT 1");
 			$Publisher = mysqli_fetch_assoc(mysqli_query($connection,"select Publisher from applicationsdump where Name = '$Name' LIMIT 1"))['Publisher'];
-			if (mysqli_query($connection,"SELECT ID, Name FROM licensedapps where Name = '$Name' limit 1") !== FALSE) { //Check to see if the license information already exists
-				$result = mysqli_query($connection,"UPDATE licensedapps SET Name = '$Name', Publisher = '$Publisher', Amount = '$LicenseAmt', Comments = '$LicenseComments' where Name = '$Name'"); //New entry
-			} else {
-				$result = mysqli_query($connection,"INSERT INTO licensedapps SET Name = '$Name', Publisher = '$Publisher', Amount = '$LicenseAmt', Comments = '$LicenseComments'"); //New entry
-			}
+			$result = mysqli_query($connection,"INSERT INTO licensedapps SET Name = '$Name', Publisher = '$Publisher', Amount = '$LicenseAmt', Comments = '$LicenseComments' ON DUPLICATE KEY UPDATE Amount = '$LicenseAmt', Comments = '$LicenseComments'"); //Add or Update entry
 		}
 		echo $Name . " was updated successfully. Here's were we'll want to go back to the previous page.";
 		echo '<script type="text/javascript">window.location = "' . $_POST["WebAddr"] .'"</script>';
