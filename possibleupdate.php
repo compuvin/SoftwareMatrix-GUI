@@ -79,6 +79,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 		$UpdatePageQTH = $row["UpdatePageQTH"];		
 		$UpdatePageQTHVarience = $row["UpdatePageQTHVarience"];		
 	}
+	
+	//Calculate the actual varience
+	if ($wpQTH > $UpdatePageQTH) {
+		$wpActualVarience = $wpQTH - $UpdatePageQTH;
+	} else {
+		$wpActualVarience = $UpdatePageQTH - $wpQTH;
+	}
 }
 
 
@@ -93,7 +100,7 @@ echo "<form method=\"post\" action=" . htmlspecialchars($_SERVER["PHP_SELF"]) . 
 		echo "<br><br>\r\n\r\n";
 		echo "<b>Tech Info:</b>\r\n";
 		echo "<br>\r\n";
-		echo "Previous location: " . $UpdatePageQTH . ", Current location: " . $wpQTH . ", Allowed varience: " . $UpdatePageQTHVarience . "\r\n";
+		echo "Previous location: " . $UpdatePageQTH . ", Current location: " . $wpQTH . ", Allowed varience: " . $UpdatePageQTHVarience . ", Actual Varience: " . $wpActualVarience . "\r\n";
 		echo "<input type=\"hidden\" name=\"appid\" value=" . $appid . ">\r\n";
 		echo "<input type=\"hidden\" name=\"UpdatePageQTH\" value=" . $wpQTH . ">\r\n";
 		echo "<input type=\"hidden\" name=\"UpdatePageQTHVarience\" value=" . $UpdatePageQTHVarience . ">\r\n";
