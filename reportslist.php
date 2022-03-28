@@ -36,7 +36,7 @@ if(mysqli_connect_errno()){
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
 	//Double check that the table doesn't exist
-	$result = mysqli_query($connection,"SELECT SortOrder, ReportName, ID FROM customreports order by SortOrder");
+	$result = mysqli_query($connection,"SELECT SortOrder, ReportName, ID FROM customreports order by SortOrder, ReportName");
 
 	if ($result == FALSE) {
 		//Create Table
@@ -53,7 +53,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 }
 
 //get results from database
-$result = mysqli_query($connection,"SELECT SortOrder, ReportName, ID FROM customreports order by SortOrder");
+$result = mysqli_query($connection,"SELECT SortOrder, ReportName, ID FROM customreports order by SortOrder, ReportName");
 $all_property = array();  //declare an array for saving property
 
 if ($result !== FALSE) {

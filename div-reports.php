@@ -6,7 +6,7 @@ $LimitR = 20; //Changable limit of reports to display
 $i = 0; //counter
 
 //get results from database
-$result = mysqli_query($connection,"SELECT ID, ReportName FROM customreports order by SortOrder limit $LimitR");
+$result = mysqli_query($connection,"SELECT ID, ReportName FROM customreports order by SortOrder, ReportName limit $LimitR");
 
 if ($result !== FALSE) {
 	echo "<ul class=\"bullet\">\r\n\t";
