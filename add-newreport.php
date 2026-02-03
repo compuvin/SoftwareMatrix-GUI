@@ -1,3 +1,7 @@
+<?php
+require_once __DIR__ . '/auth.php';
+require_auth();
+?>
 <!DOCTYPE html>
 <html>
 <head>

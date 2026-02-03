@@ -17,6 +17,16 @@ Below is a screenshot of what the GUI looks like:
 
 <img src="http://whatthefoss.com/wp-content/uploads/2019/04/Screenshot-index2.jpg">
 
+## Authentication
+
+Editing pages are protected behind a login screen. User accounts are stored in the `auth_users` table (created automatically if missing). The default admin user is seeded from `auth-config.php` if no admin exists yet.
+
+**Default credentials**
+- Username: `admin`
+- Password: `ChangeMe123!`
+
+Admins can create additional users from `admin-users.php`.
+
 Work in progress... Check out the progress here: https://github.com/compuvin/SoftwareMatrix-GUI/projects/1
 
 We could use help with the coding and usability for this. Consider creating an issue or pull request if you have suggestions to improve this project.
